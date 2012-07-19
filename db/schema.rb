@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120717224345) do
+ActiveRecord::Schema.define(:version => 20120719201724) do
 
   create_table "todos", :force => true do |t|
     t.string   "name"
@@ -19,5 +19,19 @@ ActiveRecord::Schema.define(:version => 20120717224345) do
     t.datetime "updated_at"
     t.text     "description"
   end
+
+  create_table "users", :force => true do |t|
+    t.string   "firstname"
+    t.string   "lastname"
+    t.string   "email"
+    t.date     "born"
+    t.string   "city"
+    t.boolean  "enabled"
+    t.datetime "created_at",      :null => false
+    t.datetime "updated_at",      :null => false
+    t.string   "password_digest"
+  end
+
+  add_index "users", ["email"], :name => "index_users_on_email", :unique => true
 
 end

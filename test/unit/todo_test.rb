@@ -1,3 +1,14 @@
+# == Schema Information
+#
+# Table name: todos
+#
+#  id          :integer         not null, primary key
+#  name        :string(255)
+#  created_at  :datetime
+#  updated_at  :datetime
+#  description :text
+#
+
 require 'test_helper'
 
 class TodoTest < ActiveSupport::TestCase
