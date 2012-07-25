@@ -1,0 +1,9 @@
+<p id="notice"><%= notice %></p>
+
+<ul>
+	<% @todos.each do |todo| %>
+		<li><%= todo %></li>
+	<% end %>
+</ul>
+<%= link_to 'Edit', edit_wiki_path(@wiki) %> |
+<%= link_to 'Back', wikis_path %>
