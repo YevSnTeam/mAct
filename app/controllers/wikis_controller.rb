@@ -24,8 +24,9 @@ class WikisController < ApplicationController
   # GET /wikis/new
   # GET /wikis/new.json
   def new
-    @wiki = Wiki.new
-
+    @wiki = Wiki.new    
+    #@todo = Todo.new
+ 
     respond_to do |format|
       format.html # new.html.erb
       format.json { render json: @wiki }
@@ -56,12 +57,12 @@ class WikisController < ApplicationController
   # PUT /wikis/1
   # PUT /wikis/1.json
   def update
-    @wiki = Wiki.find(params[:id])
+    @wiki = Wiki.find(params[:id])    
 
     respond_to do |format|
-      if @wiki.update_attributes(params[:wiki])
+      if @wiki.update_attributes(params[:wiki]) && @wiki.todo.update_attributes(params[:wiki])
         format.html { redirect_to @wiki, notice: 'Wiki was successfully updated.' }
-        format.json { head :no_content }
+        format.json { head :ok }
       else
         format.html { render action: "edit" }
         format.json { render json: @wiki.errors, status: :unprocessable_entity }

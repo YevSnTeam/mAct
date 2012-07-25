@@ -10,5 +10,6 @@
 #
 
 class Todo < ActiveRecord::Base
+  has_one :wiki, dependent: :destroy
   validates :name, presence: true, uniqueness: true, length: { maximum: 30 }
 end

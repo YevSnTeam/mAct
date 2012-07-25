@@ -2,6 +2,8 @@ class TodosController < ApplicationController
   # GET /todos
   # GET /todos.json
   
+
+  
   def index
     @todos = Todo.all
 
@@ -25,8 +27,7 @@ class TodosController < ApplicationController
   # GET /todos/new
   # GET /todos/new.json
   def new
-    @todo = Todo.new
-
+    
     respond_to do |format|
       format.html # new.html.erb
       format.json { render json: @todo }

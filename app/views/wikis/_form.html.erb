@@ -11,6 +11,13 @@
     </div>
   <% end %>
 
+	<%= fields_for( @wiki.todo) do |todo_f| %>
+		<div class="field">
+			<%= todo_f.label :name, "Todo" %><br />
+			<%= todo_f.text_field :name %>
+		</div>
+	<% end %>
+
   <div class="actions">
     <%= f.submit %>
   </div>
