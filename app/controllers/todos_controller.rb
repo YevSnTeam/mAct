@@ -1,9 +1,6 @@
 class TodosController < ApplicationController
   # GET /todos
   # GET /todos.json
-  
-
-  
   def index
     @todos = Todo.all
 
@@ -27,7 +24,8 @@ class TodosController < ApplicationController
   # GET /todos/new
   # GET /todos/new.json
   def new
-    
+    @todo = Todo.new
+
     respond_to do |format|
       format.html # new.html.erb
       format.json { render json: @todo }
@@ -63,7 +61,7 @@ class TodosController < ApplicationController
     respond_to do |format|
       if @todo.update_attributes(params[:todo])
         format.html { redirect_to @todo, notice: 'Todo was successfully updated.' }
-        format.json { head :ok }
+        format.json { head :no_content }
       else
         format.html { render action: "edit" }
         format.json { render json: @todo.errors, status: :unprocessable_entity }
@@ -79,7 +77,7 @@ class TodosController < ApplicationController
 
     respond_to do |format|
       format.html { redirect_to todos_url }
-      format.json { head :ok }
+      format.json { head :no_content }
     end
   end
 end

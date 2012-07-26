@@ -11,13 +11,14 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120725201549) do
+ActiveRecord::Schema.define(:version => 20120726195539) do
 
   create_table "todos", :force => true do |t|
     t.string   "name"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.text     "description"
+    t.integer  "wiki_id"
   end
 
   create_table "users", :force => true do |t|
@@ -39,6 +40,7 @@ ActiveRecord::Schema.define(:version => 20120725201549) do
     t.datetime "updated_at", :null => false
     t.integer  "todo_id"
     t.binary   "photo_id"
+    t.string   "content"
   end
 
   add_index "wikis", ["todo_id", "created_at"], :name => "index_wikis_on_todo_id_and_created_at"

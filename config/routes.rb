@@ -1,6 +1,8 @@
 MAct::Application.routes.draw do
  resources :wikis
  resources :todos
+ 
+ 
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

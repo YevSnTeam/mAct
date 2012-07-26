@@ -7,6 +7,7 @@
 #  updated_at :datetime        not null
 #  todo_id    :integer
 #  photo_id   :binary
+#  content    :string(255)
 #
 
 require 'test_helper'

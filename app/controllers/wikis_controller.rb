@@ -63,9 +63,9 @@ class WikisController < ApplicationController
       if @wiki.update_attributes(params[:wiki]) && @wiki.todo.update_attributes(params[:wiki])
         format.html { redirect_to @wiki, notice: 'Wiki was successfully updated.' }
         format.json { head :ok }
-      else
-        format.html { render action: "edit" }
-        format.json { render json: @wiki.errors, status: :unprocessable_entity }
+     # else
+       # format.html { render action: "edit" }
+      #  format.json { render json: @wiki.errors, status: :unprocessable_entity }
       end
     end
   end
