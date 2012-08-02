@@ -12,6 +12,6 @@
 
 class Wiki < ActiveRecord::Base
   # attr_accessible :title, :body
-  has_many :todos
+
   
 end

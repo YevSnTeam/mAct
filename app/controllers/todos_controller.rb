@@ -25,6 +25,7 @@ class TodosController < ApplicationController
   # GET /todos/new.json
   def new
     @todo = Todo.new
+    @photo = Photo.new
 
     respond_to do |format|
       format.html # new.html.erb
@@ -44,7 +45,7 @@ class TodosController < ApplicationController
 
     respond_to do |format|
       if @todo.save
-        format.html { redirect_to @todo, notice: 'Todo was successfully created.' }
+        format.html { redirect_to @todo, notice: 'Todo was successfully created.' } 
         format.json { render json: @todo, status: :created, location: @todo }
       else
         format.html { render action: "new" }
@@ -59,9 +60,9 @@ class TodosController < ApplicationController
     @todo = Todo.find(params[:id])
 
     respond_to do |format|
-      if @todo.update_attributes(params[:todo])
+      if @todo.update_attributes(params[:todo]) && @todo.photo.update_attributes(params[:photo])
         format.html { redirect_to @todo, notice: 'Todo was successfully updated.' }
-        format.json { head :no_content }
+        format.json { head :ok }
       else
         format.html { render action: "edit" }
         format.json { render json: @todo.errors, status: :unprocessable_entity }

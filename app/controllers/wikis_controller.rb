@@ -25,7 +25,7 @@ class WikisController < ApplicationController
   # GET /wikis/new.json
   def new
     @wiki = Wiki.new    
-    #@todo = Todo.new
+  
  
     respond_to do |format|
       format.html # new.html.erb
@@ -60,7 +60,7 @@ class WikisController < ApplicationController
     @wiki = Wiki.find(params[:id])    
 
     respond_to do |format|
-      if @wiki.update_attributes(params[:wiki]) && @wiki.todo.update_attributes(params[:wiki])
+      if @wiki.update_attributes(params[:wiki]) 
         format.html { redirect_to @wiki, notice: 'Wiki was successfully updated.' }
         format.json { head :ok }
      # else

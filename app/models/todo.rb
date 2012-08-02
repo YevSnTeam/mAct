@@ -11,7 +11,8 @@
 #
 
 class Todo < ActiveRecord::Base
-  belongs_to :wiki
+  has_many :photos
+  accepts_nested_attributes_for :photos
   validates :name, presence: true, uniqueness: true, length: { maximum: 30 }
-  attr_accessible :description, :wiki_id, :name
+  attr_accessible :description, :name
 end

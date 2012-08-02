@@ -20,7 +20,15 @@
   	<%= f.text_field :description%>
   </div>
   
+  <%= f.fields_for :photo do |builder| %>
+  	<div class="field">
+  		Fotoupload
+  		<%= builder.file_field :photofile %>
+  	</div>
+  <% end %>
+  
   <div class="actions">
     <%= f.submit %>
   </div>
 <% end %>
+  

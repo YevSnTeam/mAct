@@ -1,6 +1,12 @@
 <p id="notice"><%= notice %></p>
 
+<p>
+	<b><%= @todo.name %></b>	
+</p>
 
+<p>
+	<%= @todo.description %>
+</p>
 
 
 <%= link_to 'Edit', edit_todo_path(@todo) %> |
