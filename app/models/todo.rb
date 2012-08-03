@@ -12,7 +12,8 @@
 
 class Todo < ActiveRecord::Base
   has_many :photos
+  belongs_to :category
   accepts_nested_attributes_for :photos
   validates :name, presence: true, uniqueness: true, length: { maximum: 30 }
-  attr_accessible :description, :name
+  attr_accessible :description, :name, :category_id
 end

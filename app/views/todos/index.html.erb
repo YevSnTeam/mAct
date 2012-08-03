@@ -1,12 +1,11 @@
-<h1>Listing todos</h1>
-
 <table>
-  <tr>
-    <th>Name</th>
-    <th></th>
-    <th></th>
-    <th></th>
-  </tr>
+
+<% @categories.each do |category| %>
+	<tr>
+		<%= category.cname %>
+	</tr>
+<% end %>
+
 
 <% @todos.each do |todo| %>
   <tr>

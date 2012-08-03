@@ -3,6 +3,7 @@ class TodosController < ApplicationController
   # GET /todos.json
   def index
     @todos = Todo.all
+    @categories = Category.all
 
     respond_to do |format|
       format.html # index.html.erb

@@ -27,6 +27,13 @@
   	</div>
   <% end %>
   
+  
+  	<div class="field">
+  		<%= f.label :category_id, "Kategorie"%> <br />
+  		<%= f.select :category_id, Category.all.map {|d| [d.cname,d.id]}, prompt: "Bitte waehlen" %>  		
+  	</div>
+ 
+  
   <div class="actions">
     <%= f.submit %>
   </div>

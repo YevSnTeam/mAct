@@ -1,7 +1,7 @@
 MAct::Application.routes.draw do
  resources :wikis
  resources :todos
- 
+ resources :categories
  
 
   # The priority is based upon order of creation:
