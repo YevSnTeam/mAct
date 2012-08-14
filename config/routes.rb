@@ -1,6 +1,9 @@
 MAct::Application.routes.draw do
  resources :wikis
- resources :todos
+ resources :todos do
+   resources :photos
+   resources :categories
+ end
  resources :categories
  
 

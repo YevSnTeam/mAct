@@ -1,4 +1,4 @@
-<%= form_for(@todo) do |f| %>
+<%= form_for(@todo, remote:true) do |f| %>
   <% if @todo.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@todo.errors.count, "error") %> prohibited this todo from being saved:</h2>
@@ -11,31 +11,44 @@
     </div>
   <% end %>
 
-  <div class="field">
-    <%= f.label :name %><br />
-    <%= f.text_field :name %>
-  </div>
-  <div class="field">
-  	<%= f.label :description%><br />
-  	<%= f.text_field :description%>
-  </div>
-  
-  <%= f.fields_for :photo do |builder| %>
-  	<div class="field">
-  		Fotoupload
-  		<%= builder.file_field :photofile %>
-  	</div>
-  <% end %>
-  
-  
-  	<div class="field">
-  		<%= f.label :category_id, "Kategorie"%> <br />
-  		<%= f.select :category_id, Category.all.map {|d| [d.cname,d.id]}, prompt: "Bitte waehlen" %>  		
-  	</div>
+<table>
+	<tr>
+		<td>
+		  <div class="field">
+		    <%= f.label :name %><br />
+		    <%= f.text_field :name %>
+		  </div>
+        </td>
+        <td>
+		  <div class="field">
+		  	<%= f.label :description, "Beschreibung"%><br />
+		  	<%= f.text_field :description%>
+		  </div>
+  		</td>
+  		<td>
+		  <div class="field">
+		  		<%= f.label :category_id, "Kategorie"%> <br />
+		  		<%= f.select :category_id, Category.all.map {|d| [d.cname,d.id]}, prompt: "Bitte waehlen" %>  		
+		  </div>
+  		</td>
+  		<td>
+		  <%= f.fields_for :photo do |builder| %>
+		  	<div class="field">
+		  		<%= builder.label :photofile, "Fotoupload" %> <br />
+		  		<%= builder.file_field :photofile %>
+		  	</div>
+		  <% end %>
+		</td>
+		<td>
+			<div class="actions">
+   				 <%= f.submit %>
+			</div>
+		</td>
+  </tr>
+</table>  
+  	
  
   
-  <div class="actions">
-    <%= f.submit %>
-  </div>
+  
 <% end %>
   

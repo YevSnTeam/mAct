@@ -3,8 +3,19 @@
 <p>
 	<b><%= @category.cname %></b>	
 </p>
-
-
-
+<table>
+<% @category.todos.each do |todo| %>
+	<tr>
+		<td><%= todo.name %></td>
+	    <td><%= link_to 'Show', todo %></td>
+	    <td>Anzahl gewählt</td>
+	    <td>Anzahl erledigt</td>
+	</tr>
+<% end %>
+</table>
+<table>
+<tr>
 <%= link_to 'Edit', edit_category_path(@category) %> |
 <%= link_to 'Back', categories_path %>
+</tr>
+</table>

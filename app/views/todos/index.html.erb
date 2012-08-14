@@ -1,20 +1,18 @@
 <table>
-
-<% @categories.each do |category| %>
-	<tr>
-		<%= category.cname %>
+	<tr> 
+		<td> <%= link_to 'Sport', category_url(1) %> </td>
+		<td>  <%= link_to 'Reisen', category_url(2) %> </td>
+		<td>    <%= link_to 'Verrücktes', category_url(3) %></td>
+		<td>    <%= link_to 'Herausforderung', category_url(4) %></td>
+		<td>    <%= link_to 'Extreme', category_url(5) %></td>
 	</tr>
-<% end %>
+</table>
 
 
-<% @todos.each do |todo| %>
-  <tr>
-    <td><%= todo.name %></td>
-    <td><%= link_to 'Show', todo %></td>
-    <td>Anzahl gewählt</td>
-    <td>Anzahl erledigt</td>
-  </tr>
-<% end %>
+  <%= render 'form' %>
+  
+<table>  
+  <%= render @todos %>
 </table>
 
 <br />
