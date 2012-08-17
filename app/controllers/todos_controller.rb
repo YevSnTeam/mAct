@@ -7,6 +7,7 @@ class TodosController < ApplicationController
     @todos = Todo.all
     @todo = Todo.new
     @categories = Category.all
+  #  @doing = Doing.new
   
 
     respond_to do |format|

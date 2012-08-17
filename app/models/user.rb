@@ -15,6 +15,7 @@
 #
 
 class User < ActiveRecord::Base
+  has_many :doings
   attr_accessible :firstname, :lastname, :email, :born, :city, :password, :password_confirmation
   has_secure_password
   
