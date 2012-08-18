@@ -15,7 +15,6 @@ body {
   margin: 0; padding: 0.3em;
   text-align: left;
   border-bottom: 1px solid silver;
-  
 }
 
 ul#sidebar {
@@ -30,4 +29,15 @@ div#content {
   margin-left: 22em;
   padding: 0 1em;
   min-width: 16em;
+  min-height: 300px;
+}
+
+div.alert {
+  width: 25em;
+  background-color: #F7B0B0;
+  margin: 10px;
+  margin-left: 0;
+  padding-left: 1em;
+  border: 1px solid;
+  border-color: #F30606
 }

@@ -23,7 +23,7 @@ class User < ActiveRecord::Base
     user.email = email.downcase
     user.enabled = true
   }
-  
+  before_save :create_remember_token
   
   validates   :firstname, :lastname,  presence: true, 
                                       length: { maximum: 15 }
@@ -38,4 +38,10 @@ class User < ActiveRecord::Base
   def fullname
     self.firstname + " " + self.lastname 
   end
+  
+  private
+
+    def create_remember_token
+      self.remember_token = SecureRandom.urlsafe_base64
+    end
 end
