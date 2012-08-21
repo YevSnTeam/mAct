@@ -10,8 +10,11 @@
 	<div id="site">	
 		<div id="header">
 			<%= link_to "LOGO", '#' %> 
+			<div id="searchfield">
+					<%= yield(:searchfield) %>
+				</div>	
 			<% if signed_in? %>
-				Platzhalter für Suchfeld	
+				
 				Platzhalter für Einstellungen
  				<%= link_to "Sign out", signout_path, method: "delete" %>
 			<% else %>

@@ -4,7 +4,7 @@ class TodosController < ApplicationController
   # GET /todos
   # GET /todos.json
   def index
-    @todos = Todo.all
+    @todos = Todo.search(params[:search])
     @todo = Todo.new
     @categories = Category.all
   #  @doing = Doing.new

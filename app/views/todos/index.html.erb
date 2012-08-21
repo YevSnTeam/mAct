@@ -13,6 +13,15 @@
 
 
   <%= render 'form' %>
+<% content_for :searchfield do %>  
+  	<%= form_tag todos_path, :method => 'get' do %>
+		<p>
+			<%= text_field_tag :search, params[:search] %>
+			<%= submit_tag "Search", :name => nil %>
+		</p>
+	<% end %>
+<% end %>
+
 <table>
   <%= render @todos %>
 </table>
