@@ -16,9 +16,9 @@
 			<% if signed_in? %>
 				
 				Platzhalter für Einstellungen
- 				<%= link_to "Sign out", signout_path, method: "delete" %>
+ 				<%= link_to "Logout", signout_path, method: "delete" %>
 			<% else %>
-				<%= link_to "Sign in", signin_path %>
+				<%= link_to "Login", login_path %>
 			<% end %>
 			
 		</div>		
