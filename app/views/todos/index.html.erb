@@ -10,9 +10,8 @@
 	</tr>
 </table>
 
+<%= link_to 'Neues Todo', '/todos/new' %>
 
-
-  <%= render 'form' %>
 <% content_for :searchfield do %>  
   	<%= form_tag todos_path, :method => 'get' do %>
 		<p>

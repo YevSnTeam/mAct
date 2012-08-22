@@ -5,7 +5,6 @@ class TodosController < ApplicationController
   # GET /todos.json
   def index
     @todos = Todo.search(params[:search])
-    @todo = Todo.new
     @categories = Category.all
   #  @doing = Doing.new
   
@@ -59,11 +58,11 @@ class TodosController < ApplicationController
         # wird spaeter gemacht!!! && @photo.save
         format.html { redirect_to @todo, notice: 'Todo was successfully created.' } 
         format.json { render json: @todo, status: :created, location: @todo }
-        format.js
+        
       else
         format.html { render action: "new" }
         format.json { render json: @todo.errors, status: :unprocessable_entity }
-        format.js
+    
       end
     end
   end
