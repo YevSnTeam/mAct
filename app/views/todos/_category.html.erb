@@ -1,0 +1,8 @@
+<table>
+	<tr> 
+		<% @categories.each do |category| %>
+			<%= link_to category.cname, category %> &nbsp			
+		<% end %>	
+		<%= button_to 'zu den Kategorien', categories_path %>
+	</tr>
+</table>

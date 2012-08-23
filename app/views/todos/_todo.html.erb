@@ -2,7 +2,7 @@
 <%= content_tag_for(:tr, todo) do %>
     <td><%= todo.name %></td>
     <td><%= link_to 'Show', todo %></td>
-    <td><% link_to 'Anzahl gewählt' %></td>
+    <td>Anzahl gewählt</td>
     <td>Anzahl erledigt</td>
     <td><%= link_to 'löschen', todo, confirm: 'Wollen Sie diesen Datensatz wirklich löschen?', method: :delete, remote:true %></td>
   <% end %>
