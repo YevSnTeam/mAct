@@ -1,6 +1,12 @@
 <%= form_for(@category) do |f| %>
-  
-  <div class="field">
+ <% if @category.errors.any? %>
+ 	<ul>
+ 		<% @category.errors.full_messages.each do |msg| %>
+ 		<li><%= msg %></li>
+ 		<% end %>
+ 	</ul> 
+<% end %> 	
+ <div class="field">
     <%= f.label :cname %><br />
     <%= f.text_field :cname %>
   </div>

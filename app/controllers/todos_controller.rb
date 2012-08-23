@@ -7,12 +7,6 @@ class TodosController < ApplicationController
     @todos = Todo.search(params[:search])
     @categories = Category.all
   #  @doing = Doing.new
-  
-
-    respond_to do |format|
-      format.html # index.html.erb
-      format.json { render json: @todos }
-    end
   end
 
   # GET /todos/1
@@ -22,11 +16,6 @@ class TodosController < ApplicationController
   @todo = Todo.find(params[:id])
   @category = @todo.category
    # wird spaeter gemacht!!!  @photos = @todo.photos
-
-    respond_to do |format|
-      format.html # show.html.erb
-      format.json { render json: @todo }
-    end
   end
 
   # GET /todos/new
@@ -34,11 +23,6 @@ class TodosController < ApplicationController
   def new
   @todo = Todo.new
    # wird spaeter gemacht!!!     @photo = @todo.photos.build
-
-    respond_to do |format|
-      format.html # new.html.erb
-      format.json { render json: @todo }
-    end
   end
 
   # GET /todos/1/edit
@@ -52,18 +36,10 @@ class TodosController < ApplicationController
    @todo = Todo.new(params[:todo])
    # wird spaeter gemacht!!!    @photo = @todo.photos.build(params[:photo])
 
-    
-    respond_to do |format|
-      if @todo.save 
-        # wird spaeter gemacht!!! && @photo.save
-        format.html { redirect_to @todo, notice: 'Todo was successfully created.' } 
-        format.json { render json: @todo, status: :created, location: @todo }
-        
-      else
-        format.html { render action: "new" }
-        format.json { render json: @todo.errors, status: :unprocessable_entity }
-    
-      end
+    if @todo.save
+      redirect_to todos_path, notice: 'Todo wurde erfolgreich angelegt'
+    else
+      render "new"
     end
   end
 
@@ -71,15 +47,11 @@ class TodosController < ApplicationController
   # PUT /todos/1.json
   def update
     @todo = Todo.find(params[:id])
-
-    respond_to do |format|
-      if @todo.update_attributes(params[:todo]) 
-        format.html { redirect_to @todo, notice: 'Todo was successfully updated.' }
-        format.json { head :ok }
-      else
-        format.html { render action: "edit" }
-        format.json { render json: @todo.errors, status: :unprocessable_entity }
-      end
+    
+    if @todo.update_attributes(params[:todo])
+      redirect_to todos_path, notice: 'Todo wurde erfolgreich geändertt'
+    else
+      render "edit"
     end
   end
 
@@ -88,11 +60,12 @@ class TodosController < ApplicationController
   def destroy
     @todo = Todo.find(params[:id])
     @todo.destroy
-
+    
     respond_to do |format|
       format.html { redirect_to todos_url }
-      format.json { head :no_content }
+      format.json { head :ok }
       format.js
     end
+  
   end
 end

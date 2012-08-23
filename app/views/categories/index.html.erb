@@ -6,7 +6,8 @@
 	<tr>
 		<td><%= category.cname %></td>
 		<td><%= link_to 'Show', category %></td>
-		<td><%= link_to 'löschen', category, method: :delete, remote:true %></td>
+		<td><%= link_to 'Edit', edit_category_path(category) %></td>
+		<td><%= link_to 'löschen', category, confirm: 'Wollen Sie diesen Datensatz wirklich löschen?', method: :delete%></td>
 	</tr>
 <% end %>
 
