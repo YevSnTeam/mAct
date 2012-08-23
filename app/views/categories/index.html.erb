@@ -6,6 +6,7 @@
 	<tr>
 		<td><%= category.cname %></td>
 		<td><%= link_to 'Show', category %></td>
+		<td><%= link_to 'löschen', category, method: :delete, remote:true %></td>
 	</tr>
 <% end %>
 
