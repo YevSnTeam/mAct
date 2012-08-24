@@ -2,7 +2,15 @@ MAct::Application.routes.draw do
   get "users/new"
 
   get "users/show"
+  
 
+  get "todos/to_do/:id" => "todos#to_do", as: "addtodo"
+  
+  get "doings/destroy/:id" => "doings#destroy", as: "deleteowntodo"
+  
+ resources :doings
+ 
+# get "mytodos/index" => "doings#index" , as: "index_doings"
  resources :wikis
  resources :todos do
    resources :photos
@@ -11,7 +19,9 @@ MAct::Application.routes.draw do
  resources :categories
  resources :users
  resources :sessions, only: [:new, :create, :destroy]
+ 
 
+ 
  match '/signup',  to: 'users#new'
  match '/login',  to: 'sessions#new'
  match '/signout', to: 'sessions#destroy', via: :delete

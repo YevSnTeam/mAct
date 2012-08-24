@@ -6,6 +6,8 @@ class TodosController < ApplicationController
   def index
     @todos = Todo.search(params[:search])
     @categories = Category.all
+   
+  
   #  @doing = Doing.new
   end
 
@@ -15,6 +17,7 @@ class TodosController < ApplicationController
     
   @todo = Todo.find(params[:id])
   @category = @todo.category
+   @categories = Category.all
    # wird spaeter gemacht!!!  @photos = @todo.photos
   end
 
@@ -65,7 +68,27 @@ class TodosController < ApplicationController
       format.html { redirect_to todos_url }
       format.json { head :ok }
       format.js
-    end
+    end  
+  end
   
+  def to_do
+    @todo = Todo.find(params[:id])
+    @doing = Doing.new  
+    @user = current_user
+    @doing.user_id=@user.id
+    @doing.todo_id=@todo.id
+    @doing.do=true
+    
+    if @doing.save
+      redirect_to todos_path, notice: 'Todo wurde erfolgreich hinzugefügt!'
+    else
+      render "index"
+    end
+  end
+  
+  def my_to_dos
+    @user=current_user
+    @to_dos=@user.todos
+    
   end
 end

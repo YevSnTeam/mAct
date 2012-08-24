@@ -1,0 +1,10 @@
+<p>Meine Todos</p>
+
+<table>
+	<% @to_dos.each do |to_do| %>
+		<tr>
+			<td><%= to_do.name %></td>
+			<td><%= link_to 'löschen', deleteowntodo_url(to_do) , confirm: 'Wollen Sie diesen Datensatz wirklich löschen?' %></td>
+		</tr>
+	<% end %>
+</table>

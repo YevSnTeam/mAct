@@ -1,8 +1,9 @@
-<table>
-	<tr> 
-		<% @categories.each do |category| %>
-			<%= link_to category.cname, category %> &nbsp			
-		<% end %>	
-		<%= button_to 'zu den Kategorien', categories_path %>
-	</tr>
-</table>
+<table>	
+	<% @categories.each do |category| %>
+		<tr> 
+			<%= link_to category.cname, category %>	&nbsp
+		</tr>				
+	<% end %>
+</table>	
+<%= link_to 'zu den Kategorien', categories_path %>
+	

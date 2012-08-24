@@ -1,6 +1,10 @@
+
+<p><%= link_to 'Meine Todos', doings_url %> </p>
+
 <%= render 'category' %>
 
-<%= button_to 'Neues Todo', '/todos/new' %>
+
+<p><%= link_to 'Neues Todo', '/todos/new' %></p>
 
 <% content_for :searchfield do %>  
   	<%= form_tag todos_path, :method => 'get' do %>
