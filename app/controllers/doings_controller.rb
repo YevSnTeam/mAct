@@ -2,8 +2,7 @@
 class DoingsController < ApplicationController
    
    def show
-     @doing=Todo.find(params[:id])
-    
+     @doing=Todo.find(params[:id])    
    end
    
    def index
@@ -12,12 +11,14 @@ class DoingsController < ApplicationController
   end
   
   
-  def destroy
-    
+  def destroy    
     @todo = Todo.find(params[:id])
     @user = current_user
     @doing =  @user.todos.delete(@todo)
-    redirect_to '/doings', notice: "gelöscht"
+    redirect_to '/doings', notice: "gelöscht"    
+  end
+  
+  def done
     
   end
 end

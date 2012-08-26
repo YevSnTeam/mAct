@@ -1,9 +1,6 @@
 
 <p><%= @category.cname %>	&nbsp	<%= link_to 'Edit', edit_category_path(@category) %> </p>
 
-
-<%= render "todos/category" %>
-
 <table>
 <% @category.todos.each do |todo| %>
 	<tr>

@@ -1,4 +1,8 @@
 MAct::Application.routes.draw do
+  root to: 'home#home'
+  
+  get "/home" => "home#home"
+
   get "users/new"
 
   get "users/show"

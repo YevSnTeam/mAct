@@ -40,7 +40,7 @@ class TodosController < ApplicationController
    # wird spaeter gemacht!!!    @photo = @todo.photos.build(params[:photo])
 
     if @todo.save
-      redirect_to todos_path, notice: 'Todo wurde erfolgreich angelegt'
+      redirect_to root_path, notice: 'Todo wurde erfolgreich angelegt'
     else
       render "new"
     end
@@ -52,7 +52,7 @@ class TodosController < ApplicationController
     @todo = Todo.find(params[:id])
     
     if @todo.update_attributes(params[:todo])
-      redirect_to todos_path, notice: 'Todo wurde erfolgreich geändertt'
+      redirect_to root_path, notice: 'Todo wurde erfolgreich geändertt'
     else
       render "edit"
     end
@@ -80,7 +80,7 @@ class TodosController < ApplicationController
     @doing.do=true
     
     if @doing.save
-      redirect_to todos_path, notice: 'Todo wurde erfolgreich hinzugefügt!'
+      redirect_to root_path, notice: 'Todo wurde erfolgreich hinzugefügt!'
     else
       render "index"
     end

@@ -9,7 +9,7 @@
 	<body>
 	<div id="site">	
 		<div id="header">
-			<%= link_to "LOGO", todos_path %> 
+			<%= link_to "LOGO", root_path %> 
 			<div id="searchfield">
 					<%= yield(:searchfield) %>
 				</div>	
@@ -25,6 +25,7 @@
 			<ul id="sidebar">
 				<% if signed_in? %>
 					<p>Platzhalter für Miniprofil</p>
+					<p><%= link_to 'Meine Todos', doings_url %> </p>
 					<p>Platzhalter für Newsfeed</p>
 					<p>Platzhalter für Footer</p>
 				<% end %>
