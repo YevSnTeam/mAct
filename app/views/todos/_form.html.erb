@@ -54,10 +54,28 @@
 						var s=document.getElementById('todo_description').value;
 						document.getElementById('preview').innerHTML=s;
 					}
+					function aligning(el, key){
+						if (el.selectionStart==el.selectionEnd) {
+							el.value+='<p align="'+key+'"></p>';
+					}
+						else {
+							var text=el.value;
+							var start=el.selectionStart;
+							var end=el.selectionEnd;
+							var str1=text.substring(0, start);
+							var str2=text.substring(start, end);
+							var str3=text.substring(end, text.length);
+							var newString='<p align="'+key+'">'+str2+'</p>';
+							el.value=str1+newString+str3;
+						}
+					}
 				</script>
 	<%= f.label :description, "Beschreibung"%><br />
 	<%= submit_tag "B", type: 'button', onclick: "formatText(todo_description, 'b')" %>
 	<%= submit_tag "I", type: 'button', onclick: "formatText(todo_description, 'i');" %>
+	<%= submit_tag "Left", type: 'button', onclick: "aligning(todo_description, 'left');" %>
+	<%= submit_tag "Center", type: 'button', onclick:"aligning(todo_description, 'center');" %>
+	<%= submit_tag "Right", type: 'button', onclick: "aligning(todo_description, 'right');" %>
 	<%= submit_tag "List", type: 'button' %><br />
 	<%= f.text_area :description %><br />
 	<%= f.submit "Speichern" %>
