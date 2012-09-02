@@ -21,18 +21,7 @@
         </td>
   		<td>
 		  <div class="field">
-		  		<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
-				<meta http-equiv="Content-Style-Type" content="text/css">
-				<meta http-equiv="Content-Script-Type" content="text/javascript">
-				<script type="text/javascript">
-					function formatText (el,tag) {
-						var selectedText=document.selection?document.selection.createRange().text:el.value.substring(el.selectionStart,el.selectionEnd);
-						if (selectedText!='') {
-							var newText='<'+tag+'>'+selectedText+'</'+tag+'>';
-							el.value=el.value.replace(selectedText,newText)
-						}
-					} 
-				</script>
+				
 		  		<%= f.label :category_id, "Kategorie"%> <br />
 		  		<%= f.select :category_id, Category.all.map {|d| [d.cname,d.id]}, prompt: "Bitte waehlen" %>  		
 		  </div>
@@ -54,6 +43,19 @@
 </table>  
 
 <div class="field">
+	<meta http-equiv="Content-Script-Type" content="text/javascript">
+				<script type="text/javascript">
+					function formatText (el,tag) {
+						var text=el.value;
+						var startPosition=el.selectionStart;
+						var endPosition=el.selectionEnd;
+						var str1=text.substring(0, startPosition);
+						var str2=text.substring(startPosition, endPosition);
+						var str3=text.substring(endPosition, text.length);
+						var newString='<'+tag+'>'+str2+'</'+tag+'>';
+						el.value=str1+newString+str3;
+					}
+				</script>
 	<%= f.label :description, "Beschreibung"%><br />
 	<%= submit_tag "B", type: 'button', onclick: "formatText(todo_description, 'b');" %>
 	<%= submit_tag "I", type: 'button', onclick: "formatText(todo_description, 'i');" %>
