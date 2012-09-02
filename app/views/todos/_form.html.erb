@@ -19,14 +19,20 @@
 		    <%= f.text_field :name %>
 		  </div>
         </td>
-        <td>
-		  <div class="field">
-		  	<%= f.label :description, "Beschreibung"%><br />
-		  	<%= f.text_field :description%>
-		  </div>
-  		</td>
   		<td>
 		  <div class="field">
+		  		<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+				<meta http-equiv="Content-Style-Type" content="text/css">
+				<meta http-equiv="Content-Script-Type" content="text/javascript">
+				<script type="text/javascript">
+					function formatText (el,tag) {
+						var selectedText=document.selection?document.selection.createRange().text:el.value.substring(el.selectionStart,el.selectionEnd);
+						if (selectedText!='') {
+							var newText='<'+tag+'>'+selectedText+'</'+tag+'>';
+							el.value=el.value.replace(selectedText,newText)
+						}
+					} 
+				</script>
 		  		<%= f.label :category_id, "Kategorie"%> <br />
 		  		<%= f.select :category_id, Category.all.map {|d| [d.cname,d.id]}, prompt: "Bitte waehlen" %>  		
 		  </div>
@@ -46,9 +52,13 @@
 		</td>
   </tr>
 </table>  
-  	
- 
-  
-  
+
+<div class="field">
+	<%= f.label :description, "Beschreibung"%><br />
+	<%= submit_tag "B", type: 'button', onclick: "formatText(todo_description, 'b');" %>
+	<%= submit_tag "I", type: 'button', onclick: "formatText(todo_description, 'i');" %>
+	<%= submit_tag "U", type: 'button', onclick: "formatText(todo_description, 'u');"  %><br />
+	<%= f.text_area :description %>
+	</div>
 <% end %>
   
