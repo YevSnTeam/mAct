@@ -54,7 +54,7 @@
 	<%= submit_tag "Center", type: 'button', onclick: "document.execCommand('justifyCenter', false, null);", title: "Zentriert" %>
 	<%= submit_tag "List", type: 'button', onclick: "document.execCommand('insertUnorderedList', false, 1);", title: "Aufzählung" %>
 	<br />
-	<div contenteditable=true style="width: 45em; height: 30em; overflow: auto; border: solid gray 1px" id="editable"><%= @todo.description %></div>
+	<div contenteditable=true style="width: 45em; height: 30em; overflow: auto; border: solid gray 1px" id="editable"><%= @todo.description.html_safe %></div>
 	<%= f.hidden_field :description %>
 	<%= f.submit "Speichern",{onclick:'return copyContent(todo_description);'} %>
 </div>
