@@ -11,13 +11,7 @@
 		<div id="header">
 			<%= link_to "LOGO", root_path %> 
 			
-			<%= form_for @search do |f| %>
-			  <p>
-			    <%= f.label :name_contains, "Suche" %>
-			    <%= f.text_field :name_contains %>
-			  </p>
-			  <p class="button"><%= f.submit "Search" %></p>
-			<% end %>
+			
 			
 			<% if signed_in? %>
 				
