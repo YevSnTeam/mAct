@@ -1,6 +1,6 @@
 class HomeController < ApplicationController
   def home
-    @todos = Todo.search(params[:search])
+    @todos = Todo.all
     @categories = Category.all
   end
 end

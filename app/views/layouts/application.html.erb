@@ -11,7 +11,12 @@
 		<div id="header">
 			<%= link_to "LOGO", root_path %> 
 			<div id="searchfield">
-					<%= yield(:searchfield) %>
+					<%= form_tag root_path, :method => 'get' do %>
+						<p>
+							<%= text_field_tag :search, params[:search] %>
+							<%= submit_tag "Search", :name => nil %>
+						</p>
+					<% end %>					
 				</div>	
 			<% if signed_in? %>
 				
