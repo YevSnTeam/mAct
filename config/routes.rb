@@ -7,7 +7,7 @@ MAct::Application.routes.draw do
 
   get "users/show"
   
-
+  get "searches/new"
   get "todos/to_do/:id" => "todos#to_do", as: "addtodo"
   
   get "doings/destroy/:id" => "doings#destroy", as: "deleteowntodo"

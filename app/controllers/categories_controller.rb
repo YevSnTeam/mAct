@@ -16,7 +16,7 @@ class CategoriesController < ApplicationController
    end
   
   def show
-    @category = Category.find(params[:id])
+    @category = Category.find(params[:id]) 
     @categories = Category.all
   end
   
@@ -30,7 +30,7 @@ class CategoriesController < ApplicationController
   
   def update
     @category = Category.find(params[:id])
-    if @category.update_attributes(params[:bookamrk])
+    if @category.update_attributes(params[:category])
       redirect_to categories_path, notice: 'Kategorie wurde erfolgreich geändertt'
     else
       render "edit"

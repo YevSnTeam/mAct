@@ -17,14 +17,10 @@ class Todo < ActiveRecord::Base
   has_many :users, through: :doings
   belongs_to :category
   accepts_nested_attributes_for :photos
-  validates :name, presence: true, uniqueness: true, length: { maximum: 30 }
+  validates :name, presence: true, uniqueness: true, length: { within: 5..30 }
+  validates :category_id, presence: true
   attr_accessible :description, :name, :category_id
   
-  def self.search(search)
-    if search
-      find(:all, :conditions => ['name LIKE ?', "%#{search}%"])
-    else
-      find(:all)
-    end
-  end
+  
+  
 end
