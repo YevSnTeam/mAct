@@ -21,12 +21,6 @@ class Todo < ActiveRecord::Base
   validates :category_id, presence: true
   attr_accessible :description, :name, :category_id
   
-  def self.search(search)
-    if search
-      find(:all, :conditions => ['name LIKE ?', "%#{search}%"])
-    else
-      find(:all)
-    end
-  end
+  
   
 end

@@ -1,0 +1,10 @@
+
+<% @todos.each do |todo| %>
+		<tr>
+			<td><%= todo.name %></td>
+			<td><%= link_to 'Show', todo %></td>
+		    <td><%= link_to 'hinzufügen', addtodo_url(todo)%></td>
+		    <td>Anzahl erledigt</td>
+		    <td><%= link_to 'löschen', todo, confirm: 'Wollen Sie diesen Datensatz wirklich löschen?', method: :delete, remote:true %></td>
+		</tr>
+	<% end %>

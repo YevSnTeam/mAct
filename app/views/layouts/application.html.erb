@@ -10,14 +10,15 @@
 	<div id="site">	
 		<div id="header">
 			<%= link_to "LOGO", root_path %> 
-			<div id="searchfield">
-					<%= form_tag root_path, :method => 'get' do %>
-						<p>
-							<%= text_field_tag :search, params[:search] %>
-							<%= submit_tag "Search", :name => nil %>
-						</p>
-					<% end %>					
-				</div>	
+			
+			<%= form_for @search do |f| %>
+			  <p>
+			    <%= f.label :name_contains, "Suche" %>
+			    <%= f.text_field :name_contains %>
+			  </p>
+			  <p class="button"><%= f.submit "Search" %></p>
+			<% end %>
+			
 			<% if signed_in? %>
 				
 				Platzhalter für Einstellungen

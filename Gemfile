@@ -42,3 +42,6 @@ group :test do
   # Pretty printed test output
   gem 'turn', :require => false
 end
+
+source 'http://gemcutter.org'
+gem "meta_search"
