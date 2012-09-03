@@ -52,7 +52,7 @@ class TodosController < ApplicationController
     @todo = Todo.find(params[:id])
     
     if @todo.update_attributes(params[:todo])
-      redirect_to root_path, notice: 'Todo wurde erfolgreich geändertt'
+      redirect_to root_path, notice: 'Todo wurde erfolgreich geändert'
     else
       render "edit"
     end
