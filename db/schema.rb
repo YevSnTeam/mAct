@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120830115517) do
+ActiveRecord::Schema.define(:version => 20120904020115) do
 
   create_table "categories", :force => true do |t|
     t.string   "cname"
@@ -30,6 +30,14 @@ ActiveRecord::Schema.define(:version => 20120830115517) do
     t.integer  "todo_id"
     t.boolean  "done"
     t.boolean  "do"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  create_table "friendships", :force => true do |t|
+    t.integer  "user_id"
+    t.integer  "friend_id"
+    t.boolean  "approved"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end

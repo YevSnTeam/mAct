@@ -18,6 +18,11 @@
 class User < ActiveRecord::Base
   has_many :doings
   has_many :todos, through: :doings
+  
+  has_many :friendships
+  has_many :friends, :through => :friendships
+  
+  
   attr_accessible :firstname, :lastname, :email, :born, :city, :password, :password_confirmation
   has_secure_password
   
@@ -39,6 +44,10 @@ class User < ActiveRecord::Base
   
   def fullname
     self.firstname + " " + self.lastname 
+  end
+  
+  def friend_with?(user)
+    friends.include?(user)
   end
   
   private
