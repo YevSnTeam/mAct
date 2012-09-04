@@ -5,6 +5,7 @@
 
 <div>
     <%= form_for(@user) do |f| %>
+    <%= f.file_field :avatar %>
     
   <% if @user.errors.any? %>
   <div id="error_explanation">

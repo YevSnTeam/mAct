@@ -4,6 +4,8 @@
 	<%= @user.fullname%>
 </h1>
 
+<%= image_tag @user.avatar.url %>
+
 <h2>Friends</h2>
 <ul>
   <% @user.friendships.each do |friendship| %>
