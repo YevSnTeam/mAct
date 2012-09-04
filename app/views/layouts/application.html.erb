@@ -10,40 +10,36 @@
 	<div id="site">	
 		<div id="header">
 			<%= link_to "LOGO", root_path %> 
-		<div id="searchfield">
- 	 		<%= yield(:searchfield) %>
- 	    </div> 
- 	    
-			<% if content_for?(:sidebar)%>
-				<%= yield(:searchfield) %>
-			<% end %>
-			
+
+
+
 			<% if signed_in? %>
-				
+
 				Platzhalter für Einstellungen
  				<%= link_to "Logout", signout_path, method: "delete" %>
 			<% else %>
 				<%= link_to "Login", login_path %>
 				<%= link_to "Sign Up", signup_path %>
 			<% end %>
-			
+
 		</div>		
 			<ul id="sidebar">
 				<% if signed_in? %>
 					<p>Platzhalter für Miniprofil</p>
+					<p><%= link_to 'Meine Profilseite', current_user %> </p>
 					<p><%= link_to 'Meine Todos', doings_url %> </p>
 					<p>Platzhalter für Newsfeed</p>
 					<p>Platzhalter für Footer</p>
 				<% end %>
 			</ul>
-		
+
 		<div id="content">
 			<% flash.each do |key, value| %>
         		<div class="alert"><%= value %></div>
         	<% end %>
 			<%= yield %>
 		</div>			
-	
+
 		<div class="container"><%= debug(params) if Rails.env.development? %></div>	
 	</div>	
 	</body>

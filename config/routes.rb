@@ -3,10 +3,6 @@ MAct::Application.routes.draw do
   
   get "/home" => "home#home"
 
-  get "users/new"
-
-  get "users/show"
-  
   get "searches/new"
   get "todos/to_do/:id" => "todos#to_do", as: "addtodo"
   
@@ -23,7 +19,7 @@ MAct::Application.routes.draw do
  resources :categories
  resources :users
  resources :sessions, only: [:new, :create, :destroy]
- 
+ resources :friendships
 
  
  match '/signup',  to: 'users#new'

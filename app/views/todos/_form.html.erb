@@ -1,4 +1,10 @@
-<%= form_for(@todo) do |f| %>
+<%= form_for (@todo) do |f| %>
+<script type="text/javascript">
+ function copyContent (el) {
+ el.value =  document.getElementById("editable").innerHTML;
+ return true;
+ }
+</script>
  <% if @todo.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@todo.errors.count, "error") %> prohibited this todo from being saved:</h2>
@@ -38,49 +44,21 @@
 </table>  
 
 <div class="field">
-	<meta http-equiv="Content-Script-Type" content="text/javascript">
-				<script type="text/javascript">
-					function formatText (el,tag) {
-						var text=el.value;
-						var start=el.selectionStart;
-						var end=el.selectionEnd;
-						var str1=text.substring(0, start);
-						var str2=text.substring(start, end);
-						var str3=text.substring(end, text.length);
-						var newString='<'+tag+'>'+str2+'</'+tag+'>';
-						el.value=str1+newString+str3;
-					}
-					function showPreview(){
-						var s=document.getElementById('todo_description').value;
-						document.getElementById('preview').innerHTML=s;
-					}
-					function aligning(el, key){
-						if (el.selectionStart==el.selectionEnd) {
-							el.value+='<p align="'+key+'"></p>';
-					}
-						else {
-							var text=el.value;
-							var start=el.selectionStart;
-							var end=el.selectionEnd;
-							var str1=text.substring(0, start);
-							var str2=text.substring(start, end);
-							var str3=text.substring(end, text.length);
-							var newString='<p align="'+key+'">'+str2+'</p>';
-							el.value=str1+newString+str3;
-						}
-					}
-				</script>
 	<%= f.label :description, "Beschreibung"%><br />
-	<%= submit_tag "B", type: 'button', onclick: "formatText(todo_description, 'b');", title: "Fett" %>
-	<%= submit_tag "I", type: 'button', onclick: "formatText(todo_description, 'i');", title: "Kursiv" %>
-	<%= submit_tag "Left", type: 'button', onclick: "aligning(todo_description, 'left');", title: "Linksbündig" %>
-	<%= submit_tag "Center", type: 'button', onclick:"aligning(todo_description, 'center');", title: "Zentriert" %>
-	<%= submit_tag "Right", type: 'button', onclick: "aligning(todo_description, 'right');", title: "Rechtsbündig" %>
-	<%= submit_tag "List", type: 'button', title: "Auflistung" %><br />
-	<%= f.text_area :description %>
-	<%= f.submit "Speichern" %>
-	<%= submit_tag "Vorschau", type: 'button', onclick: "showPreview()" %>
-	</div>
+	<%= submit_tag "B", type: "button", onclick: "document.execCommand('bold',false,null);", title: "Fett" %>
+	<%= submit_tag "I"  , type: 'button', onclick: "document.execCommand('italic',false,null);", title: "Kursiv" %>
+	<%= submit_tag "Left", type: 'button', onclick: "document.execCommand('justifyLeft',false,null);" , title: "Linksbündig" %>
+	<%= submit_tag "Right"  , type: 'button', onclick: "document.execCommand('justifyRight',false,null);", title: "Rechtsbündig" %>
+	<%= submit_tag "Center", type: 'button', onclick: "document.execCommand('justifyCenter', false, null);", title: "Zentriert" %>
+	<%= submit_tag "List", type: 'button', onclick: "document.execCommand('insertUnorderedList', false, 1);", title: "Aufzählung" %>
+	<br />
+	<% if @todo.description!=nil %>
+	<div contenteditable=true style="width: 45em; height: 30em; overflow: auto; border: solid gray 1px" id="editable"><%= @todo.description.html_safe %></div>
+	<% else %>
+	<div contenteditable=true style="width: 45em; height: 30em; overflow: auto; border: solid gray 1px" id="editable"></div>
+	<% end %>
+	<%= f.hidden_field :description %>
+	<%= f.submit "Speichern",{onclick:'return copyContent(todo_description);'} %>
+</div>
 	<div id="preview"></div>
 <% end %>
-  

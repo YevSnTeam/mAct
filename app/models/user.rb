@@ -18,7 +18,13 @@
 class User < ActiveRecord::Base
   has_many :doings
   has_many :todos, through: :doings
-  attr_accessible :firstname, :lastname, :email, :born, :city, :password, :password_confirmation
+  
+  has_many :friendships
+  has_many :friends, :through => :friendships
+  
+  
+  attr_accessible :firstname, :lastname, :email, :born, :city, :password, :password_confirmation, :avatar
+  has_attached_file :avatar, styles: {medium: "300x300>", thumb: "100x100>"}, default_url: 'Fotoplatzhalter.jpg'
   has_secure_password
   
   before_save { |user| 
@@ -39,6 +45,10 @@ class User < ActiveRecord::Base
   
   def fullname
     self.firstname + " " + self.lastname 
+  end
+  
+  def friend_with?(user)
+    friends.include?(user)
   end
   
   private

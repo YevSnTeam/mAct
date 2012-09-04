@@ -1,0 +1,22 @@
+<% if signed_in? %>
+	<% if @users.any? %>
+		<ul>
+			<% @users.each do |user| %>
+			<li>
+				<%= user.fullname %>
+				<% if current_user.friend_with?(user) %>
+					<% friendship = current_user.friendships.where(:friend_id => user.id).first %>
+					<%= link_to "Entfernen", friendship, :method => :delete, :confirm  => "Willst du wirklich #{user.fullname} aus deiner Freundeliste entfernen?" %>
+				<% else %>
+					<%= link_to "Als Freund hinzufügen", friendships_path(:friend_id => user), :method => :post %>
+				<% end %>	
+			</li>
+			<%end%>
+		</ul>
+	<% else %>
+		<p>Komischerweise gibt es noch keine Users</p>
+	<% end %>
+<% else %>
+	<%= link_to "Login", login_path %>
+	<%= link_to "Sign UP", signup_path %>
+<% end %>

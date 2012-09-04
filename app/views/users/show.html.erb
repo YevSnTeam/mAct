@@ -3,3 +3,17 @@
 <h1>
 	<%= @user.fullname%>
 </h1>
+
+<%= image_tag @user.avatar.url %>
+
+<h2>Friends</h2>
+<ul>
+  <% @user.friendships.each do |friendship| %>
+  <li>
+  	<%= friendship.friend.fullname %>
+  	<%= link_to "Entfernen", friendship, :method => :delete, :confirm  => "Willst du wirklich #{friendship.friend.fullname} aus deiner Freundeliste entfernen?" %>
+  </li>
+  
+  <% end %>  
+</ul>
+<p><%= link_to "Usersliste", users_path %></p>
