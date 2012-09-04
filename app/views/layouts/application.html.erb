@@ -10,8 +10,13 @@
 	<div id="site">	
 		<div id="header">
 			<%= link_to "LOGO", root_path %> 
-			
-			
+		<div id="searchfield">
+ 	 		<%= yield(:searchfield) %>
+ 	    </div> 
+ 	    
+			<% if content_for?(:sidebar)%>
+				<%= yield(:searchfield) %>
+			<% end %>
 			
 			<% if signed_in? %>
 				

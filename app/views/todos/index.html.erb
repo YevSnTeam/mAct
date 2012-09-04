@@ -8,3 +8,10 @@
 		    <td><%= link_to 'löschen', todo, confirm: 'Wollen Sie diesen Datensatz wirklich löschen?', method: :delete, remote:true %></td>
 		</tr>
 	<% end %>
+
+<% content_for :searchfield do %>
+	<%= form_for @search do |f| %>
+   		<%= f.text_field :name_contains %>
+ 		<%= f.submit "Search" %>
+	<% end %>
+<% end %>
