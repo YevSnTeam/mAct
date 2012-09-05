@@ -14,7 +14,7 @@ class Friendship < ActiveRecord::Base
   belongs_to :user
   belongs_to :friend, :class_name => 'User'
   before_save :check_friend
-  before_save :default_values
+#  before_save :default_values
   
   validates_uniqueness_of :user_id, :scope => [:friend_id]
   
@@ -26,7 +26,7 @@ class Friendship < ActiveRecord::Base
       self.user != self.friend
     end
     
-    def default_values
-    self.approved ||= true
-  end
+   # def default_values
+  #    self.approved ||= false
+   # end
 end
