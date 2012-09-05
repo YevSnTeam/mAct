@@ -11,7 +11,9 @@
 		<div id="header">
 			<%= link_to "LOGO", root_path %> 
 
-
+			<% if content_for?(:searchfield)%>
+				<%= yield(:searchfield) %>
+			<% end %>
 
 			<% if signed_in? %>
 

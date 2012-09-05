@@ -23,7 +23,8 @@ class User < ActiveRecord::Base
   has_many :friends, :through => :friendships
   
   
-  attr_accessible :firstname, :lastname, :email, :born, :city, :password, :password_confirmation
+  attr_accessible :firstname, :lastname, :email, :born, :city, :password, :password_confirmation, :avatar
+  has_attached_file :avatar, styles: {medium: "300x300>", thumb: "100x100>"}, default_url: 'Fotoplatzhalter.jpg'
   has_secure_password
   
   before_save { |user| 
