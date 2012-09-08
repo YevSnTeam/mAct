@@ -12,13 +12,13 @@
 
 class Friendship < ActiveRecord::Base
   belongs_to :user
-  belongs_to :friend, :class_name => 'User'
+  belongs_to :friend, :class_name => 'User', :foreign_key => "friend_id"
   before_save :check_friend
-#  before_save :default_values
+ # before_save :default_values
   
   validates_uniqueness_of :user_id, :scope => [:friend_id]
   
-  
+    
   private
   
     # don't let the user add himself as a friend
@@ -26,7 +26,8 @@ class Friendship < ActiveRecord::Base
       self.user != self.friend
     end
     
-   # def default_values
-  #    self.approved ||= false
-   # end
+    def default_values
+      self.approved ||= false
+    end
+   
 end

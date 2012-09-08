@@ -19,8 +19,16 @@ class User < ActiveRecord::Base
   has_many :doings
   has_many :todos, through: :doings
   
+  
   has_many :friendships
-  has_many :friends, :through => :friendships
+  has_many :inverse_friendships, :class_name => "Friendship", :foreign_key => "friend_id"
+  
+  has_many :friends, :through => :friendships, :conditions => { :'friendships.approved' => true }, :source => :friend
+  has_many :inverse_friends, :through => :inverse_friendships, :conditions => { :'friendships.approved' => true }, :source => :user
+  
+  has_many  :invited, :through => :friendships, :source => :friend, :conditions => { :'friendships.approved' => false }
+  has_many  :requested, :through => :inverse_friendships, :source => :user, :conditions => { :'friendships.approved' => false }
+  
   
   
   attr_accessible :firstname, :lastname, :email, :born, :city, :password, :password_confirmation, :avatar
@@ -48,7 +56,15 @@ class User < ActiveRecord::Base
   end
   
   def friend_with?(user)
-    friends.include?(user)
+    friends.include?(user) || user.friends.include?(self)
+  end
+  
+  def all_friends
+    friends + inverse_friends
+  end
+  
+  def all_friendships
+    friendships + inverse_friendships
   end
   
   private

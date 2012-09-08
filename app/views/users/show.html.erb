@@ -6,16 +6,40 @@
 
 <%= image_tag @user.avatar.url %>
 
-<h2>Friends</h2>
+<h2>Freunde</h2>
+<% if @user.requested.any? %>
+	<%= "Freundschaftsanfragen (" + "#{@user.requested.count}" + "):"%>
+	<ul>
+		<% @user.inverse_friendships.each do |friendship| %>
+		<li>
+			<%= link_to friendship.user.fullname, friendship.user %>
+			<% if current_user == @user %>
+				(<%= link_to "Bestätigen", friendship, :controller => :friendships, :action => :approve, :method => :put %> / 
+				<%= link_to "Ablehnen", friendship, :method => :delete %>)
+			<% end %>
+		</li>
+		<% end %>
+	</ul>
+_______________________</br>
+<% end %>
+
 <ul>
-  <% @user.friendships.each do |friendship| %>
-  <li>
-  	<%= link_to friendship.friend.fullname, friendship.friend %>
-  	<% if current_user == @user %>
-  		<%= link_to "Entfernen", friendship, :method => :delete, :confirm  => "Willst du wirklich #{friendship.friend.fullname} aus deiner Freundeliste entfernen?" %>
-  	<% end %>
-  </li>
+  <% @user.all_friendships.each do |friendship| %>
   
+  	<% if friendship.approved %>
+  		<li>
+  			<% if @user.id == friendship.user_id %>
+   				<%= link_to friendship.friend.fullname, friendship.friend %>
+   			<% else %>
+   				<%= link_to friendship.user.fullname, friendship.user %>	
+   			<% end %>
+  			<% if current_user == @user %>
+  				<%= link_to "Entfernen", friendship, :method => :delete, 
+  				:confirm  => "Willst du wirklich #{friendship.friend.fullname} aus deiner Freundeliste entfernen?" %>
+  			<% end %>
+  			
+		</li>
+	<% end %>
   <% end %>  
 </ul>
 <p><%= link_to "Usersliste", users_path %></p>

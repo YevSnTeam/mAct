@@ -7,6 +7,8 @@ MAct::Application.routes.draw do
   get "todos/to_do/:id" => "todos#to_do", as: "addtodo"
   
   get "doings/destroy/:id" => "doings#destroy", as: "deleteowntodo"
+ 
+  put "friendships/:id" => "friendships#approve"
   
  resources :doings
  
@@ -20,7 +22,7 @@ MAct::Application.routes.draw do
  resources :users
  resources :sessions, only: [:new, :create, :destroy]
  resources :friendships
-
+ 
  
  match '/signup',  to: 'users#new'
  match '/login',  to: 'sessions#new'
