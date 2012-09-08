@@ -6,21 +6,28 @@
 
 <%= image_tag @user.avatar.url %>
 
-<h2>Freunde</h2>
+</br>
+<% if current_user != @user %>
+	<%= render :partial => "handle_friendslinks", :locals => { :user => @user } %>
+	<h2><%= "Freunde von #{@user.firstname}"%></h2>
+<% else %>
+	<h2>Meine Freunde</h2>
+<% end %>
+
 <% if @user.requested.any? %>
+	<% if current_user == @user %>
 	<%= "Freundschaftsanfragen (" + "#{@user.requested.count}" + "):"%>
 	<ul>
 		<% @user.inverse_friendships.each do |friendship| %>
 		<li>
 			<%= link_to friendship.user.fullname, friendship.user %>
-			<% if current_user == @user %>
-				(<%= link_to "Bestätigen", friendship, :controller => :friendships, :action => :approve, :method => :put %> / 
-				<%= link_to "Ablehnen", friendship, :method => :delete %>)
-			<% end %>
+			(<%= link_to "Bestätigen", friendship, :controller => :friendships, :action => :approve, :method => :put %> / 
+			<%= link_to "Ablehnen", friendship, :method => :delete %>)
 		</li>
 		<% end %>
-	</ul>
-_______________________</br>
+	</ul>	
+	_______________________</br>
+	<% end %>
 <% end %>
 
 <ul>

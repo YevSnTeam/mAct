@@ -1,15 +1,22 @@
 # encoding: utf-8
 class FriendshipsController < ApplicationController
   def create
-    @friendship = current_user.friendships.build(:friend_id => params[:friend_id], :approved => false)
-    if @friendship.save
-      flash[:notice] = "Freundschaftsanfrage gesendet"
-      redirect_to current_user
+    user = User.find(params[:friend_id])
+    if current_user.got_request_from?(user)
+      flash[:notice] = "#{user.fullname} hat dir bereits eine Freudschaftsanfrage gesendet."
+      redirect_to user 
     else
-      flash[:notice] = "Freund konnte nicht hinzugefügt werden"
-      redirect_to current_user
-    end  
+      @friendship = current_user.friendships.build(:friend_id => params[:friend_id], :approved => false)
+      if @friendship.save
+        flash[:notice] = "Freundschaftsanfrage gesendet"
+        redirect_to current_user
+      else
+        flash[:notice] = "Freund konnte nicht hinzugefügt werden"
+        redirect_to current_user
+      end  
+    end
   end
+    
   
   def destroy
     if Friendship.find(params[:id]).user_id != current_user.id
