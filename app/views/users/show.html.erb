@@ -18,9 +18,10 @@
 	<% if current_user == @user %>
 	<%= "Freundschaftsanfragen (" + "#{@user.requested.count}" + "):"%>
 	<ul>
-		<% @user.inverse_friendships.each do |friendship| %>
+		<% @user.requested.each do |requested| %>
 		<li>
-			<%= link_to friendship.user.fullname, friendship.user %>
+			<%= link_to requested.fullname, requested %>
+			<% friendship = current_user.find_any_friendship_with(requested) %>
 			(<%= link_to "Bestätigen", friendship, :controller => :friendships, :action => :approve, :method => :put %> / 
 			<%= link_to "Ablehnen", friendship, :method => :delete %>)
 		</li>
