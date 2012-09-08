@@ -9,7 +9,7 @@
 	<%= "#{user.fullname} möchte dich als Freund hinzufügen" %>
 	<%= link_to "Anfrage bestätigen", friendship, 
 	:controller => :friendships, :action => :approve, :method => :put %>
-	<%= link_to "Als Freund hinzufügen", friendships_path(:friend_id => user), :method => :post %>
+	<%= link_to "Ablehnen", friendship, :method => :delete %>
 <% else %>
 	<%= link_to "Als Freund hinzufügen", friendships_path(:friend_id => user), :method => :post %>
 <% end %>
