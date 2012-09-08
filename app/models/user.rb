@@ -59,6 +59,26 @@ class User < ActiveRecord::Base
     friends.include?(user) || user.friends.include?(self)
   end
   
+  def find_any_friendship_with(user)
+    friendship = Friendship.where(:user_id => self.id, :friend_id => user.id).first
+    if friendship.nil?
+      friendship = Friendship.where(:user_id => user.id, :friend_id => self.id).first
+    end
+      friendship
+  end
+  
+  def invited?(user)
+    friendship = find_any_friendship_with(user)
+    return false if friendship.nil?
+    friendship.friend == user
+  end
+  
+  def got_request_from?(user)
+      friendship = find_any_friendship_with(user)
+      return false if friendship.nil?
+      friendship.user == user
+  end
+  
   def all_friends
     friends + inverse_friends
   end

@@ -5,9 +5,16 @@
 			<li>
 				<%= link_to user.fullname, user %>
 				<% if current_user != user %>
+					<% friendship = current_user.find_any_friendship_with(user) %>
 					<% if current_user.friend_with?(user) %>
-						<% friendship = current_user.friendships.where(:friend_id => user.id).first %>
-						<%= link_to "Entfernen", friendship, :method => :delete, :confirm  => "Willst du wirklich #{user.fullname} aus deiner Freundeliste entfernen?" %>
+						<%= link_to "Entfernen", friendship, :method => :delete, 
+						:confirm  => "Willst du wirklich #{user.fullname} aus deiner Freundeliste entfernen?" %>
+					<% elsif current_user.invited?(user) %>
+						Du wartest auf Bestätigung deiner Anfrage. 
+						<%= link_to "Anfrage zurückziehen", friendship, :method => :delete %>
+					<% elsif current_user.got_request_from?(user) %>
+						<%= link_to "Als Freund hinzufügen (Anfrage bestätigen)", friendship, 
+						:controller => :friendships, :action => :approve, :method => :put %>
 					<% else %>
 						<%= link_to "Als Freund hinzufügen", friendships_path(:friend_id => user), :method => :post %>
 					<% end %>

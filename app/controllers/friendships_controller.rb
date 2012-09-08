@@ -4,7 +4,7 @@ class FriendshipsController < ApplicationController
     @friendship = current_user.friendships.build(:friend_id => params[:friend_id], :approved => false)
     if @friendship.save
       flash[:notice] = "Freundschaftsanfrage gesendet"
-      redirect_to root_url
+      redirect_to current_user
     else
       flash[:notice] = "Freund konnte nicht hinzugefügt werden"
       redirect_to current_user
