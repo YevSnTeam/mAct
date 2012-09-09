@@ -26,8 +26,8 @@ class User < ActiveRecord::Base
   has_many :friends, :through => :friendships, :conditions => { :'friendships.approved' => true }, :source => :friend
   has_many :inverse_friends, :through => :inverse_friendships, :conditions => { :'friendships.approved' => true }, :source => :user
   
-  has_many  :invited, :through => :friendships, :source => :friend, :conditions => { :'friendships.approved' => false }
-  has_many  :requested, :through => :inverse_friendships, :source => :user, :conditions => { :'friendships.approved' => false }
+  has_many :invited, :through => :friendships, :source => :friend, :conditions => { :'friendships.approved' => false }
+  has_many :requested, :through => :inverse_friendships, :source => :user, :conditions => { :'friendships.approved' => false }
   
   
   
