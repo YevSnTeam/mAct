@@ -1,4 +1,12 @@
 MAct::Application.routes.draw do
+  get "categories/index"
+
+  get "categories/show"
+
+  get "categories/edit"
+
+  get "categories/destroy"
+
   root to: 'home#home'
   
   get "/home" => "home#home"

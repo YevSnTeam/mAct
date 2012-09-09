@@ -1,14 +1,13 @@
 <%= form_for(@category) do |f| %>
  <% if @category.errors.any? %>
  	<ul>
- 		<% @category.errors.full_messages.each do |msg| %>
- 		<li><%= msg %></li>
- 		<% end %>
+ 		<p id="error"><%= flash[:error] %></p>
  	</ul> 
+ 	
 <% end %> 	
  <div class="field">
-    <%= f.label :cname %><br />
-    <%= f.text_field :cname %>
+    <%= f.label :name %><br />
+    <%= f.text_field :name %>
   </div>
   
  

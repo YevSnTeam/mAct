@@ -1,8 +1,11 @@
 <p id="notice"><%= notice %></p>
 
-<p>
-	<b><%= @category.cname %> </b>
-</p>
+
+
+<% @category.each do |cat| %>
+	<%= cat.name %> 
+<% end %>
+
 <p>
 	<b><%= @todo.name %></b>	
 </p>

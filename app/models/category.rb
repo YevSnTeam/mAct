@@ -10,6 +10,7 @@
 #
 
 class Category < ActiveRecord::Base
-  has_many :todos
-  attr_accessible :cname
+  attr_accessible :name
+  has_and_belongs_to_many :todos
+  validates :name, presence: true, uniqueness: true
 end
