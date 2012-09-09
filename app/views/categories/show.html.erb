@@ -1,5 +1,6 @@
-
-<p><%= @category.cname %>	&nbsp	<%= link_to 'Edit', edit_category_path(@category) %> </p>
+<p>
+	<b><%= @category.name %> </b>
+</p>
 
 <table>
 <% @category.todos.each do |todo| %>
@@ -11,4 +12,3 @@
 	</tr>
 <% end %>
 </table>
-

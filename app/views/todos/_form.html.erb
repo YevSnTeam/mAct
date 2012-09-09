@@ -26,11 +26,14 @@
 		  </div>
         </td>
   		<td>
+  			
 		  <div class="field">
-				
-		  		<%= f.label :category_id, "Kategorie"%> <br />
-		  		<%= f.select :category_id, Category.all.map {|d| [d.cname,d.id]}, prompt: "Bitte waehlen" %>  		
+			<%= select_tag("category_ids[]", options_for_select(Category.find(:all).collect { |cat| [cat.name, cat.id] }, @todo.categories) )%>	
 		  </div>
+		  <div class="field">
+			<%= select_tag("category_ids[]", options_for_select(Category.find(:all).collect { |cat| [cat.name, cat.id] }, @todo.categories), {:include_blank=>true} )%>	
+		  </div>
+		  
   		</td>
   		<td>
 		  <%= f.fields_for :photo do |builder| %>

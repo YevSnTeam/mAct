@@ -6,7 +6,6 @@ class TodosController < ApplicationController
   def index
     @search = Todo.search(params[:search])
     @todos = @search.all
-    @categories = Category.all
    
   
   #  @doing = Doing.new
@@ -17,8 +16,7 @@ class TodosController < ApplicationController
   def show
     
   @todo = Todo.find(params[:id])
-  @category = @todo.category
-   @categories = Category.all
+  @category = @todo.categories
    # wird spaeter gemacht!!!  @photos = @todo.photos
   end
 
@@ -38,6 +36,7 @@ class TodosController < ApplicationController
   # POST /todos.json
   def create
    @todo = Todo.new(params[:todo])
+   @todo.categories = Category.find_all_by_id(params[:category_ids]) if params[:category_ids]
    # wird spaeter gemacht!!!    @photo = @todo.photos.build(params[:photo])
 
     if @todo.save
@@ -51,6 +50,7 @@ class TodosController < ApplicationController
   # PUT /todos/1.json
   def update
     @todo = Todo.find(params[:id])
+    @todo.categories = Category.find_all_by_id(params[:category_ids]) if params[:category_ids]
     
     if @todo.update_attributes(params[:todo])
       redirect_to root_path, notice: 'Todo wurde erfolgreich geändert'

@@ -15,11 +15,13 @@ class Todo < ActiveRecord::Base
   has_many :photos
   has_many :doings
   has_many :users, through: :doings
-  belongs_to :category
+  has_and_belongs_to_many :categories
   accepts_nested_attributes_for :photos
+  accepts_nested_attributes_for :categories, :reject_if => lambda { |a| a[:cat].blank? }
+
   validates :name, presence: true, uniqueness: true, length: { within: 5..30 }
-  validates :category_id, presence: true
-  attr_accessible :description, :name, :category_id
+ 
+  attr_accessible :description, :name 
   
   
   
