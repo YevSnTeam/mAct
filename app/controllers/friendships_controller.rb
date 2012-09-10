@@ -9,10 +9,10 @@ class FriendshipsController < ApplicationController
       @friendship = current_user.friendships.build(:friend_id => params[:friend_id], :approved => false)
       if @friendship.save
         flash[:notice] = "Freundschaftsanfrage gesendet"
-        redirect_to current_user
+        redirect_to user
       else
         flash[:notice] = "Freund konnte nicht hinzugefügt werden"
-        redirect_to current_user
+        redirect_to user
       end  
     end
   end
@@ -25,7 +25,15 @@ class FriendshipsController < ApplicationController
       @friendship = current_user.friendships.find(params[:id])
     end
     @friendship.destroy
-    flash[:notice] = "Freund wurde entfernt"
+    if params[:link] == 'delete'
+      flash[:notice] = "Freund wurde entfernt"
+    elsif params[:link] == 'take_back'
+      flash[:notice] = "Anfrage gelöscht"
+    elsif params[:link] == 'decline'
+      flash[:notice] = "Anfrage abgelehnt"
+    else
+      flash[:notice] = "Etwas ist schiefgelaufen"
+    end
     redirect_to current_user
   end
   
