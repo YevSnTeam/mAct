@@ -46,3 +46,5 @@ end
 
 source 'http://gemcutter.org'
 gem "meta_search"
+
+gem 'public_activity', '~> 0.4.0rc2'

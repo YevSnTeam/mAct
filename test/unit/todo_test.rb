@@ -8,7 +8,6 @@
 #  updated_at  :datetime        not null
 #  description :text
 #  wiki_id     :integer
-#  category_id :integer
 #
 
 require 'test_helper'

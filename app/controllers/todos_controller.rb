@@ -6,7 +6,7 @@ class TodosController < ApplicationController
   def index
     @search = Todo.search(params[:search])
     @todos = @search.all
-   
+ 
   
   #  @doing = Doing.new
   end
