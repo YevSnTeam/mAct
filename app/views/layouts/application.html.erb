@@ -16,7 +16,7 @@
 			<% end %>
 
 			<% if signed_in? %>
-
+				<%= link_to "Mein Postfach", messages_path%>
 				Platzhalter für Einstellungen
  				<%= link_to "Logout", signout_path, method: "delete" %>
 			<% else %>

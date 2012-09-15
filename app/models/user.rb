@@ -34,6 +34,12 @@ class User < ActiveRecord::Base
   has_many :requested, :through => :inverse_friendships, :source => :user, :conditions => { :'friendships.approved' => false }
   
   
+  has_many :sent_messages, :class_name => "Message", :foreign_key => "sender_id"
+  has_many :received_messages, :class_name => "Message", :foreign_key => "recipient_id"
+  ###### WTF? RTFM!!!
+  has_many :dialogs, :class_name => "Message", :conditions => { :dialog_id => nil }, :foreign_key => "sender_id" 
+  has_many :inverse_dialogs, :class_name => "Message", :conditions => { :dialog_id => nil }, :foreign_key => "recipient_id"
+  
   
   attr_accessible :firstname, :lastname, :email, :born, :city, :password, :password_confirmation, :avatar
   has_attached_file :avatar, styles: {medium: "300x300>", thumb: "100x100>"}, default_url: 'Fotoplatzhalter.jpg'
@@ -58,6 +64,8 @@ class User < ActiveRecord::Base
   def fullname
     self.firstname + " " + self.lastname 
   end
+  
+  # ==================================== Friendship ==================================== #
   
   def friend_with?(user)
     friends.include?(user) || user.friends.include?(self)
@@ -91,6 +99,23 @@ class User < ActiveRecord::Base
     friendships + inverse_friendships
   end
   
+  # ================================= END Friendship ================================= #
+  ######################################################################################
+  
+  # ==================================== Messages ==================================== #
+  
+  def find_dialog_with(user)
+    dialog = Message.where(:sender_id => self.id, :recipient_id => user.id, :dialog_id => nil).first
+    if dialog.nil?
+      dialog = Message.where(:sender_id => user.id, :recipient_id => self.id, :dialog_id => nil).first
+    end
+    dialog
+  end
+  
+  def all_dialogs
+    dialogs + inverse_dialogs
+  end
+  # ================================== END Messages ================================== #
   private
 
     def create_remember_token

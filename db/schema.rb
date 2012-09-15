@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120909185017) do
+ActiveRecord::Schema.define(:version => 20120913213819) do
 
   create_table "activities", :force => true do |t|
     t.integer  "trackable_id"
@@ -50,6 +50,18 @@ ActiveRecord::Schema.define(:version => 20120909185017) do
     t.boolean  "approved"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
+  end
+
+  create_table "messages", :force => true do |t|
+    t.integer  "sender_id"
+    t.integer  "recipient_id"
+    t.integer  "dialog_id"
+    t.text     "body"
+    t.boolean  "received"
+    t.boolean  "deleted_by_sender"
+    t.boolean  "deleted_by_recipient"
+    t.datetime "created_at",           :null => false
+    t.datetime "updated_at",           :null => false
   end
 
   create_table "photos", :force => true do |t|

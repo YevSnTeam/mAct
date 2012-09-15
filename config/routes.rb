@@ -30,6 +30,7 @@ MAct::Application.routes.draw do
  resources :users
  resources :sessions, only: [:new, :create, :destroy]
  resources :friendships
+ resources :messages
  
  
  match '/signup',  to: 'users#new'

@@ -1,0 +1,38 @@
+<% dialog_partner = User.find(params[:recipient_id]) %>
+<% dialog_to_show = current_user.find_dialog_with(dialog_partner) %>
+<% if dialog_to_show %>
+<ul>
+	<li>
+		<b><%= dialog_to_show.sender.fullname %></b></br>
+		<%= dialog_to_show.body %>
+	</li>
+	<% dialog_to_show.replies.each do |m| %>
+		<li>
+			<b><%= link_to m.sender.fullname, m.sender %></b></br>
+			<%= m.body %>			
+		</li>
+	<% end %>
+</ul>
+<% end %>
+
+<%= form_for(@message) do |f| %>
+	<% if @message.errors.any? %>
+ 		<ul>
+ 			<p id="error"><%= flash[:error] %></p>
+ 		</ul> 
+	<% end %> 	
+	
+	
+	<%= f.hidden_field :recipient_id %>
+ 	<div class="field">
+    	<%= f.text_area :body, :rows => 8 %>
+  	</div>
+  
+ 	<div class="actions">   
+		<%= f.submit "Nachricht senden"%>
+		<%= link_to "Zurück zum Postfach", messages_path %>
+	</div>
+<% end %>
+
+
+
