@@ -2,12 +2,12 @@
 
 <ul>
 	<% @dialogs.each do |dialog| %>
-		<%dialog_partner = current_user.id == dialog.recipient_id ? User.find(dialog.sender_id) : User.find(dialog.recipient_id) %>  
+		<% dialog_partner = current_user.id == dialog.recipient_id ? User.find(dialog.sender_id) : User.find(dialog.recipient_id) %>  
 		<li>
 			Zum <%= link_to "Gespräch", new_message_path(:recipient_id => dialog_partner.id) %> mit 
 			<%= link_to dialog_partner.fullname, dialog_partner %>
-			<% num_unread_messages = dialog.replies.where(:received => false).count %>
-			<% unless dialog.received %> 
+			<% num_unread_messages = dialog.replies.where(:recipient_id => current_user, :received => false).count %>
+			<% unless dialog.received || dialog.recipient == dialog_partner %> 
 				<% num_unread_messages += 1 %>
 			<% end  %>
 			<%= "(#{num_unread_messages})" if num_unread_messages > 0 %>
