@@ -16,7 +16,9 @@
 			<% end %>
 
 			<% if signed_in? %>
-				<%= link_to "Mein Postfach", messages_path%>
+				<% num_unread_messages = current_user.received_messages.where(:received => false).count %>
+				<% link_name = num_unread_messages > 0 ? "Mein Postfach (#{num_unread_messages})" : "Mein Postfach"%>
+				<%= link_to link_name, messages_path%>
 				Platzhalter für Einstellungen
  				<%= link_to "Logout", signout_path, method: "delete" %>
 			<% else %>

@@ -36,7 +36,7 @@ class User < ActiveRecord::Base
   
   has_many :sent_messages, :class_name => "Message", :foreign_key => "sender_id"
   has_many :received_messages, :class_name => "Message", :foreign_key => "recipient_id"
-  ###### WTF? RTFM!!!
+
   has_many :dialogs, :class_name => "Message", :conditions => { :dialog_id => nil }, :foreign_key => "sender_id" 
   has_many :inverse_dialogs, :class_name => "Message", :conditions => { :dialog_id => nil }, :foreign_key => "recipient_id"
   

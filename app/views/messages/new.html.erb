@@ -3,7 +3,7 @@
 <% if dialog_to_show %>
 <ul>
 	<li>
-		<b><%= dialog_to_show.sender.fullname %></b></br>
+		<b><%= link_to dialog_to_show.sender.fullname, dialog_to_show.sender %></b></br>
 		<%= dialog_to_show.body %>
 	</li>
 	<% dialog_to_show.replies.each do |m| %>

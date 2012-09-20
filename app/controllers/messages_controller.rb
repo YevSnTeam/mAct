@@ -2,6 +2,10 @@ class MessagesController < ApplicationController
   
   def new
     @message = Message.new(:recipient_id => params[:recipient_id])
+    unread_messages = current_user.received_messages.where(:sender_id => params[:recipient_id], :received => false)
+    unread_messages.each do |msg|
+      msg.update_attributes(:received => true)
+    end
   end
   
   
